@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>519</width>
+    <height>449</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>81</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/plugins/ai_gis/icon.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>45</y>
+         <width>331</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>YOLOV5 CNN SPATIAL INFERENCER</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="pb_inference">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>250</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Inference!</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="line_file">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>371</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pb_dir_file">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>File</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cb_tipo">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>211</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Selecione o tipo de objeto</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Classes Gerais (COCO Dataset)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Arvores_10cm</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Arvores_1m</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Lixao_24cm</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="cb_size">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>60</y>
+         <width>191</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Selecione o tamanho das imagens</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>640</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>1280</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="cb_overlap">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>150</y>
+         <width>191</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.05</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.20</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.30</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.40</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.50</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QCheckBox" name="cb_slice_imagem">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Slice na imagem</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>133</y>
+         <width>47</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Overlap </string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cb_confidence">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>150</y>
+         <width>181</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>0.01</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.05</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.20</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.30</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.40</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.50</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.60</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.70</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.80</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.90</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0.95</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>130</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Confidence Threshold</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pb_dir_folder">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Folder</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_mostrar_imagem">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>190</y>
+         <width>121</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Mostrar imagem </string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_poligonos">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>210</y>
+         <width>181</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Criar camada de Poligonos</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_pontos">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>210</y>
+         <width>181</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Criar camada de Pontos</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>519</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <connections/>
+</ui>
