@@ -1,8 +1,8 @@
-# KivyMD [0.104.2](https://kivymd.readthedocs.io/en/latest/changelog/index.html)
+# GC TOOLS [1.0]()
 
 <img align="center" height=240 src="https://github.com/kivymd/internal/raw/main/logo/github_readme_logo.png"/>
 
-KivyMD is a collection of Material Design compliant widgets for use with [Kivy](http://kivy.org), a framework for cross-platform, touch-enabled graphical applications.
+GC Tools is a QGIS Plugin created to help user perform ai models like predict tasks and draw samples [Kivy](http://kivy.org), simple and efficient tool.
 
 The project's goal is to approximate Google's [Material Design spec](https://material.io/design/introduction/) as close as possible without sacrificing ease of use or application performance.
 
@@ -73,7 +73,7 @@ pip install .
 use a shallow clone (`git clone https://github.com/kivymd/KivyMD.git --depth 1`)
 to save time. If you need full commit history, then remove `--depth 1`.
 
-### How to use with [Buildozer](https://github.com/kivy/buildozer)
+### How to use 
 
 ```ini
 requirements = kivy==2.0.0, kivymd==0.104.2, sdl2_ttf == 2.0.15, pillow
@@ -92,47 +92,7 @@ Do not forget to run `buildozer android clean` or remove `.buildozer` directory
 before building if version was updated (Buildozer doesn't update already
 downloaded packages).
 
-#### On Linux
 
-- Use Buildozer [directly](https://github.com/kivy/buildozer#installing-buildozer-with-target-python-3-default) 
-  or via [Docker](https://github.com/kivy/buildozer/blob/master/Dockerfile).
-
-#### On Windows 10
-
-- Install [Ubuntu WSL](https://ubuntu.com/wsl) and follow [Linux steps](#On-Linux).
-
-#### On Windows without WSL
-
-- Install VirtualBox and follow steps from 
-[here](https://github.com/kivymd/KivyMD/blob/9b969f39d8bb03c73de105b82e66de3820020eb9/README.md#building-with-vm).
-
-#### Build automatically via GitHub Actions
-
-- Use [ArtemSBulgakov/buildozer-action@v1](https://github.com/ArtemSBulgakov/buildozer-action)
-  to build your packages automatically on push or pull request.
-- See [full workflow example](https://github.com/ArtemSBulgakov/buildozer-action#full-workflow).
-
-
-## Documentation
-
-- See documentation at https://kivymd.readthedocs.io
-- Wiki with examples of using KivyMD widgets: https://github.com/kivymd/KivyMD/wiki
-
-### Demos
-
-[Kitchen sink](https://github.com/kivymd/KivyMD/tree/master/demos/kitchen_sink) 
-app demonstrates every KivyMD widget. You can see how to use widget in code of app. 
-You can download apk for your smartphone (Android 6.0 and higher): 
-[kivymd/storage (binaries branch)](https://github.com/kivymd/storage/tree/binaries/demo_kitchen_sink).
-
-Also we have Material Studies:
-
-- [Crane](https://github.com/kivymd/KivyMD/tree/master/demos/crane)
-- [Fortnightly](https://github.com/kivymd/KivyMD/tree/master/demos/fortnightly)
-- [Rally](https://github.com/kivymd/KivyMD/tree/master/demos/rally)
-- [Shrine](https://github.com/kivymd/KivyMD/tree/master/demos/shrine).
-
-You can download apks for your smartphone: [kivymd/storage (binaries branch)](https://github.com/kivymd/storage/tree/binaries).
 
 ### Tutorials on YouTube
 
@@ -148,17 +108,6 @@ You can download apks for your smartphone: [kivymd/storage (binaries branch)](ht
 
 [Tutorials](https://www.youtube.com/watch?v=kRWtSkIYPFI&list=PLy5hjmUzdc0nMkzhphsqgPCX62NFhkell&index=1) by [Erik Sandberg](https://github.com/Dirk-Sandberg) show you how to create application with KivyMD and use its widgets.
 
-### Comparison of Flutter & KivyMD
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=P-ylDDm4TJM">
-    <img 
-        width="600" 
-        src="https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/preview-youtube-2.png" 
-        title="Click to watch it on YouTube"
-    >
-  </a>
-</p>
 
 ## Support
 
@@ -168,60 +117,6 @@ If you need assistance or you have a question, you can ask for help on our maili
 - **StackOverflow tag:** [kivymd](https://stackoverflow.com/tags/kivymd)
 - **Email:** kivydevelopment@gmail.com
 
-## Settings
-
-#### [Syntax highlighting and auto-completion for Kivy/KivyMD .kv files in PyCharm/Intellij IDEA](https://github.com/noembryo/KV4Jetbrains)
-
-## Video preview
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=crt8wA4Q5eU">
-    <img 
-        img width="600" 
-        src="https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/prevideo.png" 
-        title='Click to watch video on YouTube'
-    >
-  </a>
-</p>
-
-## Image preview
-
-<p align="center">
-  <img src="https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/previous.png">
-</p>
-
-## Contributing
-
-We always welcome your [Bug reports](https://github.com/kivymd/KivyMD/issues/new?template=bug_report.md),
-[Feature requests](https://github.com/kivymd/KivyMD/issues/new?template=feature_request.md)
-and [Pull requests](https://github.com/kivymd/KivyMD/pulls)!
-Check out [CONTRIBUTING.md](https://github.com/kivymd/.github/blob/master/.github/CONTRIBUTING.md)
-and feel free to improve KivyMD.
-
-### Setup environment
-
-We recommend you to use PyCharm to work with KivyMD code. Install
-[Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html) and
-development dependencies to your virtual environment:
-
-```bash
-pip install -e .[dev,docs]
-pre-commit install
-```
-
-Format all files and run tests:
-
-```bash
-pre-commit run --all-files
-pytest kivymd/tests --timeout=300 --cov=kivymd --cov-report=term
-```
-
-pre-commit will format modified files with Black and sort imports with isort.
-
-## Sister projects
-
-<img align="left" width="128" src="https://github.com/kivymd/internal/raw/main/logo/kivymd_extensions.png"/>
-
 ## KivyMD Extensions
 
 Additional extensions for the KivyMD library.
@@ -230,79 +125,20 @@ https://github.com/kivymd-extensions
 
 <img align="left" width="128" src="https://github.com/kivymd/internal/raw/main/logo/kivymdbuilder.png"/>
 
-## KivyMDBuilder
-
-Build apps visually.
-
-https://github.com/kivymd/KivyMDBuilder
-
 
 ## License
 
 - KivyMD is released under the terms of the 
-  [MIT License](https://github.com/kivymd/KivyMD/blob/master/LICENSE), 
+  under the terms of the [GNU General Public License], 
   same as [Kivy](https://github.com/kivy/kivy/blob/master/LICENSE).
-- [Roboto font](https://fonts.google.com/specimen/Roboto) 
-  is licensed and distributed under the terms of the 
-  [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-- [Iconic font](https://github.com/Templarian/MaterialDesign-Webfont) by the 
-  [Material Design Icons](https://materialdesignicons.com/) community covered by 
-  [SIL Open Font License 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
+
+### GC Tools Team
+
+They spent a time improving GC Tools.
+
+- Mateus Melo [@mateusmelo95](https://github.com/mateusmelo95) 
+- Remis Balaniuk [@remis](https://github.com/remis) 
 
 ## Contributors
 
-### KivyMD Team
 
-They spent a lot of time to improve KivyMD.
-
-- Yuri Ivanov [@HeaTTheatR](https://github.com/HeaTTheatR) - Core developer
-- Artem Bulgakov [@ArtemSBulgakov](https://github.com/ArtemSBulgakov) - Technical administrator, contributor
-- Andrés Rodríguez [@mixedCase](https://github.com/mixedCase) - First author of KivyMD project, contributor
-
-### Code Contributors
-
-This project exists thanks to all the people who contribute.
-*[How to contribute](#Contributing)*
-
-<a href="https://github.com/kivymd/KivyMD/graphs/contributors">
-    <img src="https://opencollective.com/kivymd/contributors.svg?width=890&button=false"/>
-</a>
-
-### Financial Contributors
-
-[Become a financial contributor](https://opencollective.com/kivymd#section-contribute) 
-on OpenCollective and help us sustain our community.
-
-#### Gold Sponsors
-
-[Become a Gold Sponsor](https://opencollective.com/kivymd/contribute/gold-sponsor-16160)
-and get your logo on our Readme with a link to your website.
-
-<a href="https://opencollective.com/kivymd/gold-sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/0/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/1/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/2/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/2/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/3/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/3/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/4/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/4/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/5/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/5/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/6/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/6/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/7/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/7/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/8/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/8/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/9/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/9/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/10/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/11/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/11/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/12/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/12/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/13/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/13/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/14/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/14/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/15/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/15/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/16/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/16/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/17/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/17/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/18/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/18/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/kivymd/gold-sponsor/19/website?requireActive=false" target="_blank"><img src="https://opencollective.com/kivymd/gold-sponsor/19/avatar.svg?requireActive=false"></a>
-
-#### Backers
-
-[Become a Backer](https://opencollective.com/kivymd/contribute/backer-16159) if you want to help develop this project.
-
-<a href="https://opencollective.com/kivymd#backers" target="_blank">
-    <img src="https://opencollective.com/kivymd/backers.svg?width=890">
-</a>
