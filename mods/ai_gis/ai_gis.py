@@ -243,25 +243,11 @@ class WorkerInference(QThread):
                             raster = gdal.Open(self.img_dir)
                             proj = osr.SpatialReference(wkt=raster.GetProjection())
                             epsg = int(proj.GetAttrValue('AUTHORITY', 1))
-                            self.polygon = QgsVectorLayer('Polygon?crs=epsg:{}&index=yes'.format(epsg), 'torres_a',
-                                                          "memory")
-                            self.point = QgsVectorLayer('Point?crs=epsg:{}&index=yes'.format(epsg), 'torres_p',
-                                                        "memory")
-                            pr = self.polygon.dataProvider()
-                            pr.addAttributes([QgsField("id", QVariant.Int), QgsField("classe", QVariant.String),
-                                              QgsField("classe_id", QVariant.Int),
-                                              QgsField("score", QVariant.Double)])
-                            pr_p = self.point.dataProvider()
-                            pr_p.addAttributes([QgsField("id", QVariant.Int), QgsField("classe", QVariant.String),
-                                                QgsField("classe_id", QVariant.Int),
-                                                QgsField("score", QVariant.Double)])
-                            fields = self.polygon.fields()
-                            self.polygon.updateFields()
-                            self.polygon.commitChanges()
-                            self.polygon.startEditing()
-                            self.point.updateFields()
-                            self.point.commitChanges()
-                            self.point.startEditing()
+
+
+
+
+
                             for pred in object_prediction_list:
                                 feat = QgsFeature()
                                 feat.setFields(fields)
@@ -293,12 +279,12 @@ class WorkerInference(QThread):
                                 pr_p.addFeatures([feat_p])
                                 self.polygon.updateExtents()
                                 self.point.updateExtents()
-                                self.res = {'x1': x1,
+                                res = {'x1': x1,
                                             'y1': y1,
                                             'x2': x2,
                                             'y2': y2
                                             }
-                                self.results.emit([i])
+                                self.results.emit([res])
 
                                 # print(geom)
                             self.polygon.commitChanges()
@@ -391,6 +377,26 @@ class AIGIS:
 
     def draw_results(self):
 
+    def create_results_layers(self):
+        self.polygon = QgsVectorLayer('Polygon?crs=epsg:{}&index=yes'.format(epsg), 'torres_a',
+                                      "memory")
+        self.point = QgsVectorLayer('Point?crs=epsg:{}&index=yes'.format(epsg), 'torres_p',
+                                    "memory")
+        pr = self.polygon.dataProvider()
+        pr.addAttributes([QgsField("id", QVariant.Int), QgsField("classe", QVariant.String),
+                          QgsField("classe_id", QVariant.Int),
+                          QgsField("score", QVariant.Double)])
+        pr_p = self.point.dataProvider()
+        pr_p.addAttributes([QgsField("id", QVariant.Int), QgsField("classe", QVariant.String),
+                            QgsField("classe_id", QVariant.Int),
+                            QgsField("score", QVariant.Double)])
+        fields = self.polygon.fields()
+        self.polygon.updateFields()
+        self.polygon.commitChanges()
+        self.polygon.startEditing()
+        self.point.updateFields()
+        self.point.commitChanges()
+        self.point.startEditing()
 
     def run(self):
         self.dlg = AIGISDialog()
@@ -399,5 +405,6 @@ class AIGIS:
         self.dlg.pb_dir_folder.clicked.connect(self.dir_folder)
         self.dlg.cb_confidence.setCurrentText('0.80')
         self.file_folder_status = None
+
         # show the dialog
         self.dlg.show()
