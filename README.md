@@ -1,6 +1,6 @@
 # GC TOOLS [1.0]()
 
-<img align="center" height=240 src="https://github.com/kivymd/internal/raw/main/logo/github_readme_logo.png"/>
+<img align="center" height=240 src="https://lh3.googleusercontent.com/pw/ADCreHfLLChjxpymS23Q94MRIZfU0nXwcMBpEsxjkZZFXktOS4y8WuXgKhbRZNO79gqyK4VOtQJHB3oLqWD2-IhWVxfxJ12Rqmk32rXyhci6CAaiLekJ9urARe9w7Cf0Q31Ji1sYP0c_tnzcMIuv0PpH_HSS=w500-h500-s-no?authuser=0"/>
 
 GC Tools is a QGIS Plugin created to help user perform ai models like predict tasks and draw samples [Kivy](http://kivy.org), simple and efficient tool.
 
