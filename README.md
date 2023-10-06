@@ -128,9 +128,9 @@ https://github.com/kivymd-extensions
 
 ## License
 
-- KivyMD is released under the terms of the 
+- GC TOOLS is released under the terms of the 
   under the terms of the [GNU General Public License], 
-  same as [Kivy](https://github.com/kivy/kivy/blob/master/LICENSE).
+  same as [GCTOOLS](https://github.com/kivy/kivy/blob/master/LICENSE).
 
 ### GC Tools Team
 
