@@ -11,7 +11,9 @@ O **GC Tools** é um plugin para o QGIS que foi projetado para auxiliar em taref
 Este projeto é mantido por:
 
 - [Mateus Melo](https://github.com/mateusmelo95)
-- Remis Balaniuk (remis.balaniuk@yahoo.com.br)
+(mateusmelosiqueira@gmail.com)
+- [Remis Balaniuk](https://github.com/remis)
+(remis.balaniuk@yahoo.com.br)
 
 ## Licença
 
