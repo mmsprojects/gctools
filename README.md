@@ -10,17 +10,6 @@
 
 O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. Nossa missão é facilitar a colaboração e o controle de versão em equipes de desenvolvimento.
 
-## Autores
-
-- Mateus Melo
-  - Email: mateusmelosiqueira@gmail.com
-  - LinkedIn: [Mateus Melo](https://www.linkedin.com/in/mateusmelo)
-  - YouTube: [Mateus Melo's YouTube Channel](https://www.youtube.com/mateusmelodev)
-
-- Remis Balaniuk
-  - Email: remis.balaniuk@yahoo.com.br
-  - LinkedIn: [Remis Balaniuk](https://www.linkedin.com/in/remisbalaniuk)
-  - YouTube: [Remis Balaniuk's YouTube Channel](https://www.youtube.com/remisbalaniuk)
 
 ## Funcionalidades Principais
 
@@ -68,5 +57,3 @@ Agradecemos antecipadamente por suas contribuições!
 O GC Tools é distribuído sob a licença [Nome da Licença](LICENSE.md). Consulte o arquivo [LICENSE.md](LICENSE.md) para obter detalhes sobre os termos de uso.
 
 ```
-
-Lembre-se de substituir "Logo do GC Tools", "mateusmelosiqueira@gmail.com", "remis.balaniuk@yahoo.com.br", URLs e outros detalhes pelos detalhes reais do seu projeto GC Tools. Esta versão do README.md inclui a estrutura de controle de versão "1.0" e a estrutura para o link do YouTube.
