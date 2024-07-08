@@ -457,7 +457,7 @@ class AIGIS:
         elif (self.dlg.cb_tipo.currentText() == 'Arvores_1m'):
             self.weight = os.path.join(self.model_path, 'arvores_mms_v2.pt')
         elif (self.dlg.cb_tipo.currentText() == 'Lixao_24cm'):
-            self.weight = os.path.join(self.model_path, 'lixao_v1.pt')
+            self.weight = os.path.join(self.model_path, 'lixao_2024.pt')
         else:
             self.weight = None
 
