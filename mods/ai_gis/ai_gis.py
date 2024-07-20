@@ -287,7 +287,7 @@ class WorkerInference(QThread):
                 if (self.file_folder_status == 0):
                     images = [os.path.basename(x) for x in os.listdir(self.img_dir)]
                     for img in images:
-                        if (self.dlg.cb_size == '1280'):
+                        if (self.dlg.cb_size == '1280'):#
                             results = self.yolov5.predict(os.path.join(self.img_dir, img), size=1280)
                             self.img_size = 1280
                         elif (self.dlg.cb_size == '640'):
