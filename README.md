@@ -1,16 +1,10 @@
-
 # GC Tools 1.0
 
-
-<img align="center" height=240 src="https://blog.clubinhomms.com.br/wp-content/uploads/2024/07/gctools_c6c2fd07-d551-41b1-9ba5-b59683009fed-Copia-Copia.jpg"/>
-
-
-```markdown
+![Logo do GC Tools](https://lh3.googleusercontent.com/pw/ADCreHeq-XUc8tTtgEqLWLCia7LzhR8DwnFnDxVL_eWAMv8FOoVWD7XikZEurbuaDkIN01yaE_OjJV6_iuSaG__HBGHqdockfh0S6KyJbzx5RnZlA4sgtPSZGz4-azZbYg6stYuk5y2tzGN7XpzYaWDc85HI=w200-h200-s-no?authuser=0)
 
 ## Descrição
 
-O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. Nossa missão é facilitar a colaboração e o controle de versão em equipes de desenvolvimento.
-
+O GC Tools é um plugin Qgis feito para a utilização de ia para detecção de objetos, amostragem e validação de modelo. Nossa missão é facilitar a colaboração e possibilitar a geração de dados espaciais de forma mais automatizada. O GC Tools foi idealizado no projeto Geocontrole, que é um projeto público-privado financiado com o propósito de desenvolvimento de métodos e insigths sobre temas voltados a monitoramento e gestão com uso de dados.
 
 ## Funcionalidades Principais
 
@@ -22,18 +16,29 @@ O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de códi
 
 ## Instalação
 
-Você pode instalar o GC Tools 1.0 executando o seguinte comando:
+Você pode instalar as dependências executando o seguinte comando no propt do OSGeoShell do Qgis:
 
 ```bash
-pip install gctools==1.0
+pip install yolov5==7.0.12
+pip install sahi==0.11.14
 ```
+*Obs: Testado na versão 3.28 do Qgis e nas versões citadas das dependencias
 
-Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
+1) Baixar o .zip do projeto;
+2) No Qgis, vá até "Complementos" > "Gerenciar e instalar" > "Instalar a partir do zip" e instale o gctools baixado;
+3) Certifique-se que o complemento está habilitado na lista de complementos.
+
 
 ## Uso
 
 Para usar o GC Tools, siga as instruções detalhadas em nossa documentação oficial: [Documentação do GC Tools](https://gctools.readthedocs.io)
 
+## Autores
+
+- Mateus Melo (mateusmelosiqueira@gmail.com)
+
+- Remis Balaniuk (remis.balaniuk@yahoo.com.br)
+  
 ## Contribuição
 
 Se você deseja contribuir com o projeto GC Tools, siga estas etapas:
@@ -44,17 +49,13 @@ Se você deseja contribuir com o projeto GC Tools, siga estas etapas:
 4. Faça push para a branch (`git push origin feature/sua-feature`)
 5. Abra um Pull Request
 
-Agradecemos antecipadamente por suas contribuições!
 
 ## Suporte
 
 - Email: suporte@gctools.com
-- Twitter: [@gctools](https://twitter.com/gctools)
-- Facebook: [GC Tools](https://www.facebook.com/gctools)
+- LinkdIn: (https://www.linkedin.com/in/mateus-melo-siqueira-91722a265)
 - YouTube: [![YouTube](https://img.shields.io/static/v1?label=subscribe&logo=youtube&logoColor=ff0000&color=brightgreen&message=2k)](https://www.youtube.com/c/KivyMD)
 
 ## Licença
 
-O GC Tools é distribuído sob a licença [Nome da Licença](LICENSE.md). Consulte o arquivo [LICENSE.md](LICENSE.md) para obter detalhes sobre os termos de uso.
-
-```
+The GC Tools é is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License. 
