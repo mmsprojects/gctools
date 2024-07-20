@@ -123,7 +123,7 @@ class WorkerInference(QThread):
                 # device="cpu",  # or 'cuda'
                 # )
                 detection_model = AutoDetectionModel.from_pretrained(
-                    model_type='yolov8',
+                    model_type='yolov5',
                     model_path=self.weight,
                     confidence_threshold=float(self.confidence),
                     device=self.device,  # or 'cuda:0'
