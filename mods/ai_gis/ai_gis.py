@@ -189,7 +189,7 @@ class WorkerInference(QThread):
                             score = round(pred.score.value, 2)
                             feat.setAttributes([i, classe, classe_id, score])
                             feat_p.setAttributes([i, classe, classe_id, score])
-                            xmin = box[0]
+                            xmin = box[0]#
                             ymin = box[1]
                             xmax = xmin + box[2]
                             ymax = ymin + box[3]
