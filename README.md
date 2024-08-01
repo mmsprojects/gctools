@@ -25,7 +25,8 @@ O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de códi
 Você pode instalar o GC Tools 1.0 executando o seguinte comando:
 
 ```bash
-pip install gctools==1.0
+pip install sahi==0.11.15
+pip install yolov5==7.0.8
 ```
 
 Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
