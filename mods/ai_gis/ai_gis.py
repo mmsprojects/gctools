@@ -32,7 +32,7 @@ from qgis.core import QgsVectorLayer,QgsRasterLayer, QgsRectangle, QgsVectorFile
 from qgis.PyQt.QtCore import QVariant
 # Initialize Qt resources from file resources.py
 #from .resources import *
-# Import the code for the dialog
+# Import the code for the dialog#
 from .ai_gis_dialog import AIGISDialog
 from qgis.core import QgsExpressionContextUtils, QgsProject
 from qgis.core import QgsVectorFileWriter

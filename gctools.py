@@ -75,7 +75,7 @@ class GCTOOLS:
         """
         # Save reference to the QGIS interface
         self.iface = iface
-        # initialize plugin directory
+        # initialize plugin directory#
         self.plugin_dir = os.path.dirname(__file__)
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
