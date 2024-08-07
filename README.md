@@ -24,9 +24,14 @@ O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de códi
 
 Você pode instalar o GC Tools 1.0 executando o seguinte comando:
 
+1) Instalar as dependências no OSGeoShell (Menu iniciar -> OSGeoShell)
 
 pip install sahi==0.11.15
 pip install yolov5==7.0.8
+
+2) Clonar o repositório ou baixar o .zip
+
+3) No Qgis, instalar a biblioteca a partir do zip
 ```
 
 Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
