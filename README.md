@@ -1,10 +1,16 @@
+
 # GC Tools 1.0
 
-![Logo do GC Tools](https://lh3.googleusercontent.com/pw/ADCreHeq-XUc8tTtgEqLWLCia7LzhR8DwnFnDxVL_eWAMv8FOoVWD7XikZEurbuaDkIN01yaE_OjJV6_iuSaG__HBGHqdockfh0S6KyJbzx5RnZlA4sgtPSZGz4-azZbYg6stYuk5y2tzGN7XpzYaWDc85HI=w200-h200-s-no?authuser=0)
+
+<img align="center" height=240 src="https://blog.clubinhomms.com.br/wp-content/uploads/2024/07/gctools_c6c2fd07-d551-41b1-9ba5-b59683009fed-Copia-Copia.jpg"/>
+
+
+```markdown
 
 ## Descrição
 
-O GC Tools é um plugin Qgis feito para a utilização de ia para detecção de objetos, amostragem e validação de modelo. Nossa missão é facilitar a colaboração e possibilitar a geração de dados espaciais de forma mais automatizada. O GC Tools foi idealizado no projeto Geocontrole, que é um projeto público-privado financiado com o propósito de desenvolvimento de métodos e insigths sobre temas voltados a monitoramento e gestão com uso de dados.
+O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. Nossa missão é facilitar a colaboração e o controle de versão em equipes de desenvolvimento.
+
 
 ## Funcionalidades Principais
 
@@ -16,29 +22,24 @@ O GC Tools é um plugin Qgis feito para a utilização de ia para detecção de 
 
 ## Instalação
 
-Você pode instalar as dependências executando o seguinte comando no propt do OSGeoShell do Qgis:
+Você pode instalar o GC Tools 1.0 executando o seguinte comando:
 
-```bash
-pip install yolov5==7.0.12
-pip install sahi==0.11.14
+1) Instalar as dependências no OSGeoShell (Menu iniciar -> OSGeoShell)
+
+pip install sahi==0.11.15
+pip install yolov5==7.0.8
+
+2) Clonar o repositório ou baixar o .zip
+
+3) No Qgis, instalar a biblioteca a partir do zip
 ```
-*Obs: Testado na versão 3.28 do Qgis e nas versões citadas das dependencias
 
-1) Baixar o .zip do projeto;
-2) No Qgis, vá até "Complementos" > "Gerenciar e instalar" > "Instalar a partir do zip" e instale o gctools baixado;
-3) Certifique-se que o complemento está habilitado na lista de complementos.
-
+Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
 
 ## Uso
 
 Para usar o GC Tools, siga as instruções detalhadas em nossa documentação oficial: [Documentação do GC Tools](https://gctools.readthedocs.io)
 
-## Autores
-
-- Mateus Melo (mateusmelosiqueira@gmail.com)
-
-- Remis Balaniuk (remis.balaniuk@yahoo.com.br)
-  
 ## Contribuição
 
 Se você deseja contribuir com o projeto GC Tools, siga estas etapas:
@@ -49,11 +50,13 @@ Se você deseja contribuir com o projeto GC Tools, siga estas etapas:
 4. Faça push para a branch (`git push origin feature/sua-feature`)
 5. Abra um Pull Request
 
+Agradecemos antecipadamente por suas contribuições!
 
 ## Suporte
 
 - Email: suporte@gctools.com
-- LinkdIn: (https://www.linkedin.com/in/mateus-melo-siqueira-91722a265)
+- Twitter: [@gctools](https://twitter.com/gctools)
+- Facebook: [GC Tools](https://www.facebook.com/gctools)
 - YouTube: [![YouTube](https://img.shields.io/static/v1?label=subscribe&logo=youtube&logoColor=ff0000&color=brightgreen&message=2k)](https://www.youtube.com/c/KivyMD)
 
 ## Licença
