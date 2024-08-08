@@ -33,6 +33,10 @@ pip install yolov5==7.0.8
 2) Clonar o repositório ou baixar o .zip
 
 3) No Qgis, instalar a biblioteca a partir do zip
+
+Em caso de problema na instalação
+Pegue o arquivo de dependência libomp140.x86_64.dll e coloque em 'C:\Windows\System32'
+
 ```
 
 Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
