@@ -34,7 +34,7 @@ pip install yolov5==7.0.8
 
 3) No Qgis, instalar a biblioteca a partir do zip
 
-Em caso de problema na instalação
+Em caso de problema na instalação -> OSError WinError 126, error loading fbgemm.dll or dependencies
 Pegue o arquivo de dependência libomp140.x86_64.dll e coloque em 'C:\Windows\System32'
 
 ```
