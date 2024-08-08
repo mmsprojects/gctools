@@ -26,6 +26,7 @@ Você pode instalar o GC Tools 1.0 executando o seguinte comando:
 
 1) Instalar as dependências no OSGeoShell (Menu iniciar -> OSGeoShell)
 
+pip cache remove *
 pip install sahi==0.11.15
 pip install yolov5==7.0.8
 
