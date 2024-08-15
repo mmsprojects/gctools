@@ -182,6 +182,45 @@ class SAMPLE:
 
     def importclasses_n(self):
         self.dlg_open_classes.close()
+        self.create_project()
+
+    def create_project_s(self):
+        qwidget = QWidget()
+        savedirname, _ = QFileDialog.getSaveFileName(
+            qwidget, "Save project", "", " SQLite (*.sqlite)")
+        print(savedirname)
+        if savedirname:
+            self.db = savedirname
+            conn = sqlite3.connect(self.db)
+            c = conn.cursor()
+            c.execute('PRAGMA journal_mode=wal')
+            c.execute("""CREATE TABLE IF NOT EXISTS data_proc(
+                                                      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                      proc_id integer NOT NULL,
+                                                      folder text,
+                                                      image text,
+                                                      status text,
+                                                      process integer,
+                                                      date datetime,
+                                                      FOREIGN KEY(proc_id) REFERENCES procs(id))""")
+            c.execute("""CREATE TABLE IF NOT EXISTS procs(
+                                                         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                         date_start datetime,
+                                                         date_finish datetime,
+                                                         status text,
+                                                         process integer,
+                                                         user text)""")
+
+            c.execute("""CREATE TABLE IF NOT EXISTS sample_classes(
+                                                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                    classe text)""")
+            c.close()
+            conn.close()
+            self.dlg_create_project.close()
+
+    def create_project_n(self):
+        self.dlg_create_project.close()
+        pass
     def importclasses(self):
         self.dlg_open_classes = QDialog()
         self.dlg_open_classes.setWindowTitle("Abrir projeto")
@@ -194,6 +233,19 @@ class SAMPLE:
         self.layout_open_classes.addWidget(self.pb_open_classes_nao, 0, 1)
         self.dlg_open_classes.setLayout(self.layout_open_classes)
         self.dlg_open_classes.show()
+
+    def create_project(self):
+        self.dlg_create_project = QDialog()
+        self.dlg_create_project.setWindowTitle("Criar projeto")
+        self.layout_create_project = QGridLayout()
+        self.pb_create_project_sim = QPushButton(text='Sim')
+        self.pb_create_project_sim.pressed.connect(self.create_project_s)
+        self.pb_create_project_nao = QPushButton(text='Não')
+        self.pb_create_project_nao.pressed.connect(self.create_project_n)
+        self.layout_create_project.addWidget(self.pb_create_project_sim, 0, 0)
+        self.layout_create_project.addWidget(self.pb_create_project_nao, 0, 1)
+        self.dlg_create_project.setLayout(self.layout_create_project)
+        self.dlg_create_project.show()
     def saveclasses(self):
         conn = sqlite3.connect(self.db)
         c = conn.cursor()
