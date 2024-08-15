@@ -444,7 +444,7 @@ class RubberBandRectangleTool(QgsMapTool):
 
     def addpoly2layer(self,layer,rubber,attrs):
         layer.startEditing()
-        pr = layer.dataProvider()
+        pr = layer.dataProvider()#
         #pr.addAttributes([QgsField("Imagem", QVariant.String)])
         rect = rubber.asGeometry()
         feature = QgsFeature()
