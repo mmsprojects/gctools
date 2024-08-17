@@ -203,7 +203,7 @@ class GCTOOLS:
             action.setWhatsThis(whats_this)
         if add_to_toolbar:
             self.toolbar.addAction(action)
-        #if add_to_menu:
+        #if add_to_menu:#
             #self.menu.addAction(action)
         if parentMenu:
             parentMenu.addAction(action)
