@@ -38,7 +38,7 @@ import io
 from PIL import Image, ImageQt
 from functools import partial
 
-from .mods.ai_gis.ai_gis import AIGIS
+from .mods.ai_inf.ai_inf import AIINF
 from .mods.sample.sample import SAMPLE
 from .mods.about.about_dialog import ABOUTDialog
 from .resources import *
@@ -107,7 +107,7 @@ class GCTOOLS:
         self.menuBar.insertMenu(self.iface.firstRightStandardMenu().menuAction(), self.menugc)
 
         #self.menuLogButton = self.createToolButton(self.toolbar, u'LOGIN', False)
-        self.menuAiGisButton = self.createToolButton(self.toolbar, u'AIGIS', False)
+        self.menuAiInfButton = self.createToolButton(self.toolbar, u'AIINF', False)
         self.menuSampleButton = self.createToolButton(self.toolbar, u'SAMPLE', False)
 
         self.toolbar.addSeparator()
@@ -224,19 +224,19 @@ class GCTOOLS:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
 
-        icon_path_aigis = ':/plugins/gctools/icons/aigis.png'
-        self.action_aigis = self.add_action(
-            icon_path_aigis,
-            text=u'AIGIS',
-            callback=self.run_ai_gis,
+        icon_path_aiinf = ':/plugins/gctools/icons/aiinf.png'
+        self.action_aiinf = self.add_action(
+            icon_path_aiinf,
+            text=u'AIINF',
+            callback=self.run_ai_inf,
             # add_to_menu=False,
             add_to_toolbar=False,
             # withShortcut=False,
             parentToolbar=self.menugc,
             isCheckable=False
         )
-        self.menuAiGisButton.addAction(self.action_aigis)
-        self.menuAiGisButton.setDefaultAction(self.action_aigis)
+        self.menuAiInfButton.addAction(self.action_aiinf)
+        self.menuAiInfButton.setDefaultAction(self.action_aiinf)
 
         icon_path_sample = ':/plugins/gctools/icons/sample.png'
         self.action_sample = self.add_action(
@@ -285,9 +285,9 @@ class GCTOOLS:
 
 
 
-    def run_ai_gis(self):
-        self.ai_gis = AIGIS(self.iface,self)
-        self.ai_gis.run()
+    def run_ai_inf(self):
+        self.ai_inf = AIINF(self.iface,self)
+        self.ai_inf.run()
 
     def signal_worker(self,data):
         print("teste_signal",data)
