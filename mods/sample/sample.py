@@ -457,6 +457,7 @@ class RubberBandRectangleTool(QgsMapTool):
         #
     def canvasReleaseEvent(self, event):
         if event.button() == 1 and self.rubber_band:
+            self.sample.changeClasse()
             self.addpoly2layer(self.sample.map_layer_samples.currentLayer(), self.rubber_band,[0,self.sample.classeidatual,self.sample.classeatual])
             self.start_point = None
             self.rubber_band = None
