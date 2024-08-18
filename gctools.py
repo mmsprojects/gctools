@@ -40,6 +40,7 @@ from functools import partial
 
 from .mods.ai_inf.ai_inf import AIINF
 from .mods.sample.sample import SAMPLE
+from .mods.datagen.datagen import DATAGEN
 from .mods.about.about_dialog import ABOUTDialog
 from .resources import *
 # Import the code for the dialog
@@ -109,6 +110,7 @@ class GCTOOLS:
         #self.menuLogButton = self.createToolButton(self.toolbar, u'LOGIN', False)
         self.menuAiInfButton = self.createToolButton(self.toolbar, u'AIINF', False)
         self.menuSampleButton = self.createToolButton(self.toolbar, u'SAMPLE', False)
+        self.menuDatagenButton = self.createToolButton(self.toolbar, u'DATAGEN', False)
 
         self.toolbar.addSeparator()
         #self.menuROSButton = self.createToolButton(self.toolbar, u'ROS', False)
@@ -252,6 +254,20 @@ class GCTOOLS:
         self.menuSampleButton.addAction(self.action_sample)
         self.menuSampleButton.setDefaultAction(self.action_sample)
 
+        icon_path_datagen = ':/plugins/gctools/icons/datagen.png'
+        self.action_datagen = self.add_action(
+            icon_path_sample,
+            text=u'DATAGEN',
+            callback=self.run_gcdatagen,
+            # add_to_menu=False,
+            add_to_toolbar=False,
+            # withShortcut=False,
+            parentToolbar=self.menugc,
+            isCheckable=False
+        )
+        self.menuDatagenButton.addAction(self.action_datagen)
+        self.menuDatagenButton.setDefaultAction(self.action_datagen)
+
 
         # will be set False in run()
         self.first_start = True
@@ -283,7 +299,9 @@ class GCTOOLS:
         self.sample = SAMPLE(self.iface,self)
         self.sample.run()
 
-
+    def run_gcdatagen(self):
+        self.datagen = DATAGEN(self.iface,self)
+        self.datagen.run()
 
     def run_ai_inf(self):
         self.ai_inf = AIINF(self.iface,self)
