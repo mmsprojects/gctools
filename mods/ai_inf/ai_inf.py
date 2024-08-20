@@ -8,8 +8,8 @@
                               -------------------
         begin                : 2023-10-06
         git sha              : $Format:%H$
-        copyright            : (C) 2021 by MMS
-        email                : mateusmelosiqueira@gmail.com
+        copyright            : Mateus Melo Siqueira/Remis Balaniuk
+        email                : mms.projects0@gmail.com/remis.balaniuk@yahoo.com.br
  ***************************************************************************/
 
 /***************************************************************************

@@ -8,8 +8,8 @@
                               -------------------
         begin                : 2023-10-06
         git sha              : $Format:%H$
-        copyright            : (C) 2021 by MMS
-        email                : mateusmelosiqueira@gmail.com
+        copyright            : Mateus Melo Siqueira/Remis Balaniuk
+        email                : mms.projects0@gmail.com/remis.balaniuk@yahoo.com.br
  ***************************************************************************/
 
 /***************************************************************************
@@ -215,20 +215,40 @@ class WorkerInference(QThread):
             print("extent ",f"xmin: {xmin_}, ymin: {ymin_}, xmax: {xmax_}, ymax: {ymax_}")
             #print("extent",extent)
             extensoes_layer.select(feature.id())
+
+            caminho_do_diretorio = os.path.join(output_dir,"images")
+            if os.path.exists(caminho_do_diretorio):
+                pass
+            else:
+                os.makedirs(caminho_do_diretorio)
+
             # Cortar o raster
             processing.run("gdal:cliprasterbymasklayer", {
                 'INPUT': raster_virtual,
                 'MASK': QgsProcessingFeatureSourceDefinition(extensoes_layer.id(), True),
-                'OUTPUT': f"{output_dir}/image_{feature.id()}.tif",
+                'OUTPUT': f"{caminho_do_diretorio}/image_{feature.id()}.tif",
                 'BAND': raster_band,
                 'CROP_TO_EXTENT': True,
                 'NO_DATA': None,
                 'ALPHA_BAND': False,
                 'CROP_TO_CUTLINE': True
             })
-            print(f"{output_dir}/image_{feature.id()}.tif")
+            img = Image.open(f"{caminho_do_diretorio}/image_{feature.id()}.tif")
+            name = f"{caminho_do_diretorio}/image_{feature.id()}.tif".replace(".tif",".jpeg")
+            img.save(name)
+            os.remove(f"{caminho_do_diretorio}/image_{feature.id()}.tif")
+
+
+            print(f"{caminho_do_diretorio}/image_{feature.id()}.tif")
+
+            caminho_do_diretorio2 = os.path.join(output_dir, "labels")
+            if os.path.exists(caminho_do_diretorio2):
+                pass
+            else:
+                os.makedirs(caminho_do_diretorio2)
+
             # Criar o arquivo de rótulos
-            with open(f"{output_dir}/labels_{feature.id()}.txt", 'w') as f:
+            with open(f"{caminho_do_diretorio2}/labels_{feature.id()}.txt", 'w') as f:
                 for amostra_feature in amostras_layer.getFeatures():
                     amostra_geom = amostra_feature.geometry()
                     if amostra_geom.intersects(geom):
