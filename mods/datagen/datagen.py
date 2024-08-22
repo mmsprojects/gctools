@@ -279,12 +279,16 @@ class WorkerInference(QThread):
                         x_center_norm = (x_center - extent.xMinimum()) / extent.width()
                         y_center_norm = -1*(y_center - extent.yMaximum()) / extent.height()
 
+
                         bbox_width = amostra_geom.boundingBox().width() / extent.width()
                         bbox_height = amostra_geom.boundingBox().height() / extent.height()
 
-                        # ID da classe (assumimos 0)
-                        class_id = 0
-                        f.write(f"{class_id} {x_center_norm} {y_center_norm} {bbox_width} {bbox_height}\n")
+
+                        if not (x_center_norm<0 or y_center_norm<0) :
+                            if not (x_center_norm>1 or y_center_norm>1):
+                                # ID da classe (assumimos 0)
+                                class_id = 0
+                                f.write(f"{class_id} {x_center_norm} {y_center_norm} {bbox_width} {bbox_height}\n")
 
 
 class DATAGEN:
