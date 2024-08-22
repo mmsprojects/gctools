@@ -269,7 +269,7 @@ class WorkerInference(QThread):
                         coord_transform = QgsCoordinateTransform(
                             amostras_layer.crs(),
                             extensoes_layer.crs(),
-                            QgsProject.instance()#
+                            QgsProject.instance()
                         )
 
                         amostra_geom.transform(coord_transform)
