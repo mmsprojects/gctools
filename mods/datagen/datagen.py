@@ -55,6 +55,9 @@ from qgis.core import *
 from qgis.gui import *
 from osgeo import gdal
 from qgis.core import QgsProcessingFeatureSourceDefinition
+from qgis.core import QgsProject, QgsVectorLayer, QgsRasterLayer, QgsCoordinateTransform, QgsCoordinateReferenceSystem, QgsFeatureRequest
+from qgis.analysis import QgsRasterCalculatorEntry, QgsRasterCalculator
+
 class WorkerInference(QThread):
     def __init__(self, plugin_dir,cls_main):
         QThread.__init__(self)
@@ -212,7 +215,7 @@ class WorkerInference(QThread):
             xmax_ = extent.xMaximum()
             ymax_ = extent.yMaximum()
 
-            print("extent ",f"xmin: {xmin_}, ymin: {ymin_}, xmax: {xmax_}, ymax: {ymax_}")
+            #print("extent ",f"xmin: {xmin_}, ymin: {ymin_}, xmax: {xmax_}, ymax: {ymax_}")
             #print("extent",extent)
             extensoes_layer.select(feature.id())
 
@@ -239,7 +242,7 @@ class WorkerInference(QThread):
             os.remove(f"{caminho_do_diretorio}/image_{feature.id()}.tif")
 
 
-            print(f"{caminho_do_diretorio}/image_{feature.id()}.tif")
+            #print(f"{caminho_do_diretorio}/image_{feature.id()}.tif")
 
             caminho_do_diretorio2 = os.path.join(output_dir, "labels")
             if os.path.exists(caminho_do_diretorio2):
@@ -248,10 +251,11 @@ class WorkerInference(QThread):
                 os.makedirs(caminho_do_diretorio2)
 
             # Criar o arquivo de rótulos
-            with open(f"{caminho_do_diretorio2}/labels_{feature.id()}.txt", 'w') as f:
+            with open(f"{caminho_do_diretorio2}/image_{feature.id()}.txt", 'w') as f:
                 for amostra_feature in amostras_layer.getFeatures():
                     amostra_geom = amostra_feature.geometry()
                     if amostra_geom.intersects(geom):
+                        """
                         # Calcular as coordenadas da amostra na imagem cortada
                         intersection = amostra_geom.intersection(geom)
                         xmin, ymin, xmax, ymax = intersection.boundingBox().toRectF().getCoords()
@@ -260,8 +264,27 @@ class WorkerInference(QThread):
                         # Criar o rótulo
                         label_line = self.create_yolo_label(classe_id,xmin_,ymin_,extent.width(), extent.height(), xmin, ymin, xmax, ymax)
                         f.write(label_line + '\n')
+                        """
+                        #transform_context = QgsCoordinateTransformContext()
+                        coord_transform = QgsCoordinateTransform(
+                            amostras_layer.crs(),
+                            extensoes_layer.crs(),
+                            QgsProject.instance()
+                        )
 
+                        amostra_geom.transform(coord_transform)
+                        x_center, y_center = amostra_geom.centroid().asPoint().x(), amostra_geom.centroid().asPoint().y()
+                        #print(extent.xMinimum(),extent.yMinimum(),extent.xMaximum(),extent.yMaximum())
+                        # Calcular as coordenadas relativas na imagem
+                        x_center_norm = (x_center - extent.xMinimum()) / extent.width()
+                        y_center_norm = -1*(y_center - extent.yMaximum()) / extent.height()
 
+                        bbox_width = amostra_geom.boundingBox().width() / extent.width()
+                        bbox_height = amostra_geom.boundingBox().height() / extent.height()
+
+                        # ID da classe (assumimos 0)
+                        class_id = 0
+                        f.write(f"{class_id} {x_center_norm} {y_center_norm} {bbox_width} {bbox_height}\n")
 
 
 class DATAGEN:
