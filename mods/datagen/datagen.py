@@ -57,7 +57,8 @@ from osgeo import gdal
 from qgis.core import QgsProcessingFeatureSourceDefinition
 from qgis.core import QgsProject, QgsVectorLayer, QgsRasterLayer, QgsCoordinateTransform, QgsCoordinateReferenceSystem, QgsFeatureRequest
 from qgis.analysis import QgsRasterCalculatorEntry, QgsRasterCalculator
-
+import random
+import shutil
 class WorkerInference(QThread):
     def __init__(self, plugin_dir,cls_main):
         QThread.__init__(self)
@@ -205,6 +206,7 @@ class WorkerInference(QThread):
         amostras_layer = QgsProject.instance().mapLayersByName(nm2)[0]
         raster_virtual = QgsProject.instance().mapLayersByName(nm3)[0]
 
+
         # Iterar sobre as extensões
         for feature in extensoes_layer.getFeatures():
             extensoes_layer.removeSelection()
@@ -290,7 +292,83 @@ class WorkerInference(QThread):
                                 class_id = 0
                                 f.write(f"{class_id} {x_center_norm} {y_center_norm} {bbox_width} {bbox_height}\n")
 
+        # Cria os diretórios de destino se não existirem
+        for subset in ['train', 'val']:
+            for subdir in ['images', 'labels']:
+                os.makedirs(os.path.join(output_dir, subset, subdir), exist_ok=True)
 
+        image_files = [f for f in os.listdir(os.path.join(output_dir, 'images')) if f.endswith('.jpeg')]  # Adapte a extensão conforme necessário
+        print(image_files)
+        tamanho = len(image_files)
+        indice_divisao = int(tamanho * 0.80)
+
+        train = image_files[:indice_divisao]
+        val = image_files[indice_divisao:]
+
+        for img in train:
+            print(os.path.join(output_dir,"images",img), os.path.join(output_dir,"train","images",img))
+            os.rename(os.path.join(output_dir,"images",img), os.path.join(output_dir,"train","images",img))
+            os.rename(os.path.join(output_dir, "labels", img.replace(".jpeg",".txt")), os.path.join(output_dir, "train", "labels", img.replace(".jpeg",".txt")))
+
+        for img in val:
+            os.rename(os.path.join(output_dir,"images",img), os.path.join(output_dir,"val","images",img))
+            os.rename(os.path.join(output_dir, "labels", img.replace(".jpeg",".txt")), os.path.join(output_dir, "val", "labels", img.replace(".jpeg",".txt")))
+
+        diretorio_para_remover = os.path.join(output_dir,"images")
+
+        try:
+            shutil.rmtree(diretorio_para_remover)
+            print(f"O diretório {diretorio_para_remover} foi removido com sucesso.")
+        except OSError as e:
+            print(f"Erro ao remover o diretório: {e}")
+
+        diretorio_para_remover = os.path.join(output_dir, "labels")
+
+        try:
+            shutil.rmtree(diretorio_para_remover)
+            print(f"O diretório {diretorio_para_remover} foi removido com sucesso.")
+        except OSError as e:
+            print(f"Erro ao remover o diretório: {e}")
+
+        #split dataset
+        #source_directory = output_dir  # Substitua pelo caminho da sua pasta fonte
+        #target_directory = output_dir  # Substitua pelo caminho da sua pasta de destino
+        #self.split_data(source_directory, target_directory)
+    def split_data(self,source_dir, target_dir, split_ratio=0.8):
+        """
+        Divide os arquivos em dois conjuntos (train e val) com a proporção especificada.
+
+        Args:
+            source_dir: Diretório raiz dos dados.
+            target_dir: Diretório de destino para os conjuntos divididos.
+            split_ratio: Proporção de dados para o conjunto de treinamento.
+        """
+
+        # Cria os diretórios de destino se não existirem
+        for subset in ['train', 'val']:
+            for subdir in ['images', 'labels']:
+                os.makedirs(os.path.join(target_dir, subset, subdir), exist_ok=True)
+
+        # Obtém a lista de arquivos de imagem (assumindo que os nomes são consistentes)
+        image_files = [f for f in os.listdir(os.path.join(source_dir, 'images')) if
+                       f.endswith('.jpg')]  # Adapte a extensão conforme necessário
+
+        # Embaralha a lista de arquivos
+        random.shuffle(image_files)
+
+        # Calcula o índice de divisão
+        split_index = int(len(image_files) * split_ratio)
+
+        # Cria os conjuntos de treino e validação
+        for i, file in enumerate(image_files):
+            subset = 'train' if i < split_index else 'val'
+            source_image = os.path.join(source_dir, 'images', file)
+            source_label = os.path.join(source_dir, 'labels',
+                                        file.replace('.jpg', '.txt'))  # Adapte a extensão conforme necessário
+            target_image = os.path.join(target_dir, subset, 'images', file)
+            target_label = os.path.join(target_dir, subset, 'labels', file.replace('.jpg', '.txt'))
+            os.rename(source_image, target_image)
+            os.rename(source_label, target_label)
 class DATAGEN:
     def __init__(self, iface, cls_main):
 
