@@ -254,9 +254,9 @@ class GCTOOLS:
         self.menuSampleButton.addAction(self.action_sample)
         self.menuSampleButton.setDefaultAction(self.action_sample)
 
-        icon_path_datagen = ':/plugins/gctools/icons/datagen.png'
+        icon_path_datagen = ':/plugins/gctools/icons/datasetgen.jpg'
         self.action_datagen = self.add_action(
-            icon_path_sample,
+            icon_path_datagen,
             text=u'DATAGEN',
             callback=self.run_gcdatagen,
             # add_to_menu=False,

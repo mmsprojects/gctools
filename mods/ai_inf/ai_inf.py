@@ -456,11 +456,11 @@ class AIINF:
         if (self.dlg.cb_tipo.currentText() == 'Classes Gerais (COCO Dataset)'):
             self.weight = os.path.join(self.model_path, 'yolov5x6.pt')
         elif (self.dlg.cb_tipo.currentText() == 'Arvores_10cm'):
-            self.weight = os.path.join(self.model_path, 'arvores_mms_2024_v1.pt')
+            self.weight = os.path.join(self.model_path, 'arvores_mms_2024_v3.pt')
         elif (self.dlg.cb_tipo.currentText() == 'Arvores_1m'):
             self.weight = os.path.join(self.model_path, 'arvores_mms_v2.pt')
         elif (self.dlg.cb_tipo.currentText() == 'Lixao_24cm'):
-            self.weight = os.path.join(self.model_path, 'lixao_v1.pt')
+            self.weight = os.path.join(self.model_path, 'novo_lixao_2024_v3.pt')
         else:
             self.weight = None
 
