@@ -284,50 +284,7 @@ class WorkerInference(QThread):
                         self.up_list.emit([self.proc_id,int(100*(i+1)/total)])
                         self.updatesqlitedata(self.proc_id,int(100),img,int(100*(i+1)/total))
 
-            else:
-                self.yolov5 = YOLOv5(self.weight, self.device)
 
-                if (self.file_folder_status == 0):
-                    images = [os.path.basename(x) for x in os.listdir(self.img_dir)]
-                    for img in images:
-                        if (self.dlg.cb_size == '1280'):#
-                            results = self.yolov5.predict(os.path.join(self.img_dir, img), size=1280)
-                            self.img_size = 1280
-                        elif (self.dlg.cb_size == '640'):
-                            results = self.yolov5.predict(os.path.join(self.img_dir, img), size=640)
-                            self.img_size = 1280
-                        else:
-                            results = self.yolov5.predict(os.path.join(self.img_dir, img), size=640)
-                            self.img_size = 640
-                        if (self.dlg.cb_mostrar_imagem.isChecked()):
-                            results.show()
-                elif (self.file_folder_status == 1):
-                    if (self.dlg.cb_size == '1280'):
-                        results = self.yolov5.predict(self.img_dir, size=1280)
-                        self.img_size = 1280
-                    elif (self.dlg.cb_size == '640'):
-                        results = self.yolov5.predict(self.img_dir, size=640)
-                        self.img_size = 1280
-                    else:
-                        results = self.yolov5.predict(self.img_dir, size=640)
-                        self.img_size = 640
-                    if (self.dlg.cb_mostrar_imagem.isChecked()):
-                        results.show()
-
-            # perform inference with larger input size
-            # results = yolov5.predict(image1, size=1280)
-
-            # perform inference with test time augmentation
-            # results = yolov5.predict(image1, augment=True)
-
-            # perform inference on multiple images
-            # results = yolov5.predict([image1, image2], size=1280, augment=True)
-
-            # show detection bounding boxes on image
-            # results.show()
-
-            # save results into "results/" folder
-            # results.save(save_dir='results/')
             self.c.close()
             self.conn.close()
     def pixel2coord(self, raster_path, x, y):
@@ -385,10 +342,12 @@ class AIINF:
         print(self.model_path)
 
         #get weight
-        weight = self.getmodel()
+        #weight = self.getmodel()
+        weight = self.dlg.line_modelo.displayText()
 
         #get img_size
-        img_size = self.getsize()
+        #img_size = self.getsize()
+        img_size = 1280
 
         #is sliced
         if self.dlg.cb_slice_imagem.isChecked():
@@ -899,6 +858,12 @@ class AIINF:
                 # Adicione a camada vetorial à área de trabalho do QGIS
                 QgsProject.instance().addMapLayer(camada_vetorial)
 
+    def get_modelo(self):
+        qfd = QFileDialog()
+        filter = "Pytorch (*.pt)"
+        openeddirname = QFileDialog.getOpenFileName(qfd, "Open project", "", filter)[0]
+        self.dlg.line_modelo.setText(openeddirname)
+        print(openeddirname)
 
     def CloseEvent(self, event):
         print("closed")
@@ -909,8 +874,9 @@ class AIINF:
     def run(self):
         self.dlg = AIINFDialog()
         self.dlg.pb_inference.clicked.connect(self.setworker)
-        self.dlg.pb_dir_file.clicked.connect(self.dir_file)
+        #self.dlg.pb_dir_file.clicked.connect(self.dir_file)
         self.dlg.pb_dir_folder.clicked.connect(self.dir_folder)
+        self.dlg.pb_modelo.clicked.connect(self.get_modelo)
         self.dlg.cb_confidence.setCurrentText('0.80')
         self.file_folder_status = None
         # show the dialog
