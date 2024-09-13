@@ -119,170 +119,85 @@ class WorkerInference(QThread):
             self.device = 'cuda:0'#"cpu"  # or "cpu"
             #self.weight = None
 
-            if self.is_slice:
-                # detection_model = Yolov5DetectionModel(
-                # model_path=self.weight,
-                # prediction_score_threshold=float(self.dlg.cb_confidence.currentText()),
-                # device="cpu",  # or 'cuda'
-                # )
-                detection_model = AutoDetectionModel.from_pretrained(
-                    model_type='yolov5',
-                    model_path=self.weight,
-                    confidence_threshold=float(self.confidence),
-                    device=self.device,  # or 'cuda:0'
+
+            # detection_model = Yolov5DetectionModel(
+            # model_path=self.weight,
+            # prediction_score_threshold=float(self.dlg.cb_confidence.currentText()),
+            # device="cpu",  # or 'cuda'
+            # )
+            detection_model = AutoDetectionModel.from_pretrained(
+                model_type='yolov5',
+                model_path=self.weight,
+                confidence_threshold=float(self.confidence),
+                device=self.device,  # or 'cuda:0'
+            )
+
+
+
+            #PROCESSAR DIRETÓRIO###########################################################
+            #elif (self.file_folder_status == 0):
+            #images = [os.path.basename(x) for x in os.listdir(self.img_dir)]
+
+            process = []
+            total = len(self.images)
+            for i,img in enumerate(self.images):
+                print(os.path.join(self.img_dir[i], img))
+
+                image = read_image(os.path.join(self.img_dir[i], img))
+                print("pre slice")
+                result = get_sliced_prediction(
+                    image,
+                    detection_model,
+                    slice_height=self.img_size,
+                    slice_width=self.img_size,
+                    overlap_height_ratio=float(self.overlap),
+                    overlap_width_ratio=float(self.overlap)
                 )
 
-                if (self.file_folder_status == 1):
-                    image = read_image(self.img_dir)
-
-                    result = get_sliced_prediction(
-                        image,
-                        detection_model,
-                        slice_height=self.img_size,
-                        slice_width=self.img_size,
-                        overlap_height_ratio=float(self.overlap),
-                        overlap_width_ratio=float(self.overlap)
-                    )
-                    if (self.dlg.cb_mostrar_imagem.isChecked()):
-                        visualization_result = visualize_object_predictions(
-                            image,
-                            object_prediction_list=result.object_prediction_list,
-                            output_dir=os.path.join(self.plugin_dir, 'temp'),
-                            file_name="temp_prediction",
-                        )
-                        # Image(os.path.join(self.plugin_dir,'temp','temp_prediction.png'))
-                        img = Image.open(os.path.join(self.plugin_dir, 'temp', 'temp_prediction.png'))
-
-                        img.show()
-                    i = 0
-                    if (self.dlg.cb_poligonos.isChecked()):
-                        object_prediction_list = result.object_prediction_list
-                        raster = gdal.Open(self.img_dir,gdal.GA_ReadOnly)
-                        proj = osr.SpatialReference(wkt=raster.GetProjection())
-                        epsg = int(proj.GetAttrValue('AUTHORITY', 1))
-                        self.polygon = QgsVectorLayer('Polygon?crs=epsg:{}&index=yes'.format(epsg), 'poligonos_a',
-                                                      "memory")
-                        self.point = QgsVectorLayer('Point?crs=epsg:{}&index=yes'.format(epsg), 'pontos_p',
-                                                    "memory")
-                        pr = self.polygon.dataProvider()
-                        pr.addAttributes([QgsField("id", QVariant.Int), QgsField("classe", QVariant.String),
-                                          QgsField("classe_id", QVariant.Int), QgsField("score", QVariant.Double)])
-                        pr_p = self.point.dataProvider()
-                        pr_p.addAttributes([QgsField("id", QVariant.Int), QgsField("classe", QVariant.String),
-                                            QgsField("classe_id", QVariant.Int),
-                                            QgsField("score", QVariant.Double)])
-
-                        fields = self.polygon.fields()
-
-                        self.polygon.updateFields()
-                        self.polygon.commitChanges()
-                        self.polygon.startEditing()
-                        self.point.updateFields()
-                        self.point.commitChanges()
-                        self.point.startEditing()
-                        for pred in object_prediction_list:
-                            feat = QgsFeature()
-                            feat.setFields(fields)
-                            feat_p = QgsFeature()
-                            feat_p.setFields(fields)
-                            pred_coco = pred.to_coco_prediction().json
-                            box = pred_coco['bbox']
-                            classe = pred_coco['category_name']
-                            classe_id = pred_coco['category_id']
-                            score = round(pred.score.value, 2)
-                            feat.setAttributes([i, classe, classe_id, score])
-                            feat_p.setAttributes([i, classe, classe_id, score])
-                            xmin = box[0]#
-                            ymin = box[1]
-                            xmax = xmin + box[2]
-                            ymax = ymin + box[3]
-                            x1, y1 = self.pixel2coord(self.img_dir, xmin, ymin)
-                            x2, y2 = self.pixel2coord(self.img_dir, xmax, ymin)
-                            x3, y3 = self.pixel2coord(self.img_dir, xmax, ymax)
-                            x4, y4 = self.pixel2coord(self.img_dir, xmin, ymax)
-                            # print(self.pixel2coord(self.img_dir,0,0))
-                            geom = QgsGeometry.fromPolygonXY(
-                                [[QgsPointXY(x1, y1), QgsPointXY(x2, y2), QgsPointXY(x3, y3), QgsPointXY(x4, y4)]])
-                            geom_p = geom.centroid()
-                            feat.setGeometry(geom)
-                            feat_p.setGeometry(geom_p)
-                            pr.addFeatures([feat])
-                            pr_p.addFeatures([feat_p])
-                            self.polygon.updateExtents()
-                            self.point.updateExtents()
-                            i = i + 1
-                            # print(geom)
-                        self.polygon.commitChanges()
-                        self.point.commitChanges()
-                        QgsProject.instance().addMapLayers([self.polygon])
-                        if (self.dlg.cb_pontos.isChecked()):
-                            QgsProject.instance().addMapLayers([self.point])
+                #object_prediction_list = result["object_prediction_list"]
+                object_prediction_list = result.object_prediction_list
 
 
-                #PROCESSAR DIRETÓRIO###########################################################
-                elif (self.file_folder_status == 0):
-                    #images = [os.path.basename(x) for x in os.listdir(self.img_dir)]
+                for pred in object_prediction_list:
 
-                    process = []
-                    total = len(self.images)
-                    for i,img in enumerate(self.images):
-                        print(os.path.join(self.img_dir[i], img))
+                    pred_coco = pred.to_coco_prediction().json
+                    box = pred_coco['bbox']
+                    classe = pred_coco['category_name']
+                    classe_id = pred_coco['category_id']
+                    score = round(pred.score.value, 2)
 
-                        image = read_image(os.path.join(self.img_dir[i], img))
-                        print("pre slice")
-                        result = get_sliced_prediction(
-                            image,
-                            detection_model,
-                            slice_height=self.img_size,
-                            slice_width=self.img_size,
-                            overlap_height_ratio=float(self.overlap),
-                            overlap_width_ratio=float(self.overlap)
-                        )
+                    xmin = box[0]
+                    ymin = box[1]
+                    xmax = xmin + box[2]
+                    ymax = ymin + box[3]
+                    x1, y1 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmin, ymin)
+                    x2, y2 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmax, ymin)
+                    x3, y3 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmax, ymax)
+                    x4, y4 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmin, ymax)
+                    # print(self.pixel2coord(self.img_dir,0,0))
 
-                        #object_prediction_list = result["object_prediction_list"]
-                        object_prediction_list = result.object_prediction_list
+                    res = {'x1': x1,
+                           'y1': y1,
+                           'x2': x2,
+                           'y2': y2,
+                           'x3': x3,
+                           'y3': y3,
+                           'x4': x4,
+                           'y4': y4,
+                           'id':i,
+                           'classe':classe,
+                           'classe_id':classe_id,
+                           'score': score}
 
-
-                        for pred in object_prediction_list:
-
-                            pred_coco = pred.to_coco_prediction().json
-                            box = pred_coco['bbox']
-                            classe = pred_coco['category_name']
-                            classe_id = pred_coco['category_id']
-                            score = round(pred.score.value, 2)
-
-                            xmin = box[0]
-                            ymin = box[1]
-                            xmax = xmin + box[2]
-                            ymax = ymin + box[3]
-                            x1, y1 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmin, ymin)
-                            x2, y2 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmax, ymin)
-                            x3, y3 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmax, ymax)
-                            x4, y4 = self.pixel2coord(os.path.join(self.img_dir[i], img), xmin, ymax)
-                            # print(self.pixel2coord(self.img_dir,0,0))
-
-                            res = {'x1': x1,
-                                   'y1': y1,
-                                   'x2': x2,
-                                   'y2': y2,
-                                   'x3': x3,
-                                   'y3': y3,
-                                   'x4': x4,
-                                   'y4': y4,
-                                   'id':i,
-                                   'classe':classe,
-                                   'classe_id':classe_id,
-                                   'score': score}
-
-                            self.results.emit([res])
+                    self.results.emit([res])
 
 
-                            # print(geom)
-                        #print(i+1)
-                        #print([int(100*(i+1)/total)])
+                    # print(geom)
+                #print(i+1)
+                #print([int(100*(i+1)/total)])
 
-                        self.up_list.emit([self.proc_id,int(100*(i+1)/total)])
-                        self.updatesqlitedata(self.proc_id,int(100),img,int(100*(i+1)/total))
+                self.up_list.emit([self.proc_id,int(100*(i+1)/total)])
+                self.updatesqlitedata(self.proc_id,int(100),img,int(100*(i+1)/total))
 
 
             self.c.close()
@@ -349,23 +264,24 @@ class AIINF:
         #img_size = self.getsize()
         img_size = 1280
 
+
         #is sliced
-        if self.dlg.cb_slice_imagem.isChecked():
-            is_slice = 1
-        else:
-            is_slice = 0
+        #if self.dlg.cb_slice_imagem.isChecked():
+        is_slice = 1
+        #else:
+            #is_slice = 0
 
         #get pontos
-        if self.dlg.cb_pontos.isChecked():
-            is_pontos = 1
-        else:
-            is_pontos = 0
+        #if self.dlg.cb_pontos.isChecked():
+        is_pontos = 1
+        #else:
+            #is_pontos = 0
 
         #get poligonos
-        if self.dlg.cb_poligonos.isChecked():
-            is_poligonos = 1
-        else:
-            is_poligonos = 0
+        #if self.dlg.cb_poligonos.isChecked():
+        is_poligonos = 1
+        #else:
+            #is_poligonos = 0
 
         #get confidence
         confidence = float(self.dlg.cb_confidence.currentText())
@@ -501,8 +417,8 @@ class AIINF:
                                      QgsField("score", QVariant.Double)])
 
             QgsProject.instance().addMapLayers([self.point])
-            if (self.dlg.cb_poligonos.isChecked()):
-                QgsProject.instance().addMapLayers([self.polygon])
+            #if (self.dlg.cb_poligonos.isChecked()):
+            QgsProject.instance().addMapLayers([self.polygon])
         else:
             output = self.dlg.ln_output.displayText()
             dir = os.path.dirname(output)
@@ -881,8 +797,10 @@ class AIINF:
         self.file_folder_status = None
         # show the dialog
         self.dlg.show()
-        self.dlg.actionSalvar.triggered.connect(self.saveproject)
-        self.dlg.actionAbrir.triggered.connect(self.openproject)
+        #self.dlg.actionSalvar.triggered.connect(self.saveproject)
+        self.dlg.pb_criar_projeto.clicked.connect(self.saveproject)
+        #self.dlg.actionAbrir.triggered.connect(self.openproject)
+        self.dlg.pb_abrir_projeto.clicked.connect(self.openproject)
         self.dlg.actionBoxes.triggered.connect(self.getboxes)
         self.dlg.cb_memory.toggled.connect(self.setmemoryoutput)
         self.dlg.pb_salvar.clicked.connect(self.setoutput)
