@@ -9,8 +9,7 @@
 
 ## Descrição
 
-O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. Nossa missão é facilitar a colaboração e o controle de versão em equipes de desenvolvimento.
-
+O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. 
 
 
 ## Funcionalidades Principais
