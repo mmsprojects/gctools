@@ -2,7 +2,7 @@
 # GC Tools 1.0
 
 
-<img src="https://drive.google.com/uc?id=1RpXgIp0bJ0I6cFJSSXaKL1ds7SPstpra" style="width: 300px; height: auto;" alt="Minha Imagem">
+
 
 
 ```markdown
@@ -11,6 +11,7 @@
 
 O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. Nossa missão é facilitar a colaboração e o controle de versão em equipes de desenvolvimento.
 
+<img src="https://drive.google.com/uc?id=1YOXmF4hwqjtyTJjOckd-8knK1LKuhZj8" style="width: 300px; height: auto;" alt="Minha Imagem">
 
 ## Funcionalidades Principais
 
@@ -39,7 +40,7 @@ Pegue o arquivo de dependência libomp140.x86_64.dll e coloque em 'C:\Windows\Sy
 
 ```
 
-<img align="center" height=240 src="https://photos.google.com/photo/AF1QipOTBzxN0rBqgBQgpZwy2pGgOf3lbWljEjCjo7Pf"/>
+<img src="https://drive.google.com/uc?id=1RpXgIp0bJ0I6cFJSSXaKL1ds7SPstpra" style="width: 300px; height: auto;" alt="Minha Imagem">
 
 Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
 
