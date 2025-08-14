@@ -40,7 +40,7 @@ Pegue o arquivo de dependência libomp140.x86_64.dll e coloque em 'C:\Windows\Sy
 
 ```
 
-<img src="https://drive.google.com/uc?id=1RpXgIp0bJ0I6cFJSSXaKL1ds7SPstpra" style="width: 900px; height: auto;" alt="Minha Imagem">
+<img src="https://drive.google.com/uc?id=1RpXgIp0bJ0I6cFJSSXaKL1ds7SPstpra" style="width: 600px; height: auto;" alt="Minha Imagem">
 
 Certifique-se de que você tem o Python configurado corretamente em seu ambiente.
 
