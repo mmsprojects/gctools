@@ -2,7 +2,7 @@
 # GC Tools 1.0
 
 
-<img align="center" height=240 src="(https://drive.google.com/file/d/1RpXgIp0bJ0I6cFJSSXaKL1ds7SPstpra/view?usp=sharing)"/>
+<img src="https://drive.google.com/uc?id=1RpXgIp0bJ0I6cFJSSXaKL1ds7SPstpra" style="width: 300px; height: auto;" alt="Minha Imagem">
 
 
 ```markdown
