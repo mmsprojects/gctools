@@ -3,7 +3,7 @@
 
 
 
-
+<img src="https://drive.google.com/uc?id=1YOXmF4hwqjtyTJjOckd-8knK1LKuhZj8" style="width: 300px; height: auto;" alt="Minha Imagem">
 
 ```markdown
 
@@ -11,7 +11,7 @@
 
 O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. Nossa missão é facilitar a colaboração e o controle de versão em equipes de desenvolvimento.
 
-<img src="https://drive.google.com/uc?id=1YOXmF4hwqjtyTJjOckd-8knK1LKuhZj8" style="width: 300px; height: auto;" alt="Minha Imagem">
+
 
 ## Funcionalidades Principais
 
