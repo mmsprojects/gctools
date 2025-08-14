@@ -9,7 +9,7 @@
 
 ## Descrição
 
-O GC Tools é um conjunto de ferramentas para gerenciamento de projetos de código aberto. 
+O GC Tools é um conjunto de ferramentas para detecção de objetos em imagens georreferenciadas (satélite e aérea). 
 
 
 ## Funcionalidades Principais
