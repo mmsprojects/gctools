@@ -14,7 +14,7 @@ O GC Tools é um conjunto de ferramentas para detecção de objetos em imagens g
 Este trabalho foi realizado no escopo do projeto Geotecnologias no Controle Externo
 da Administração Pública – Geocontrole, financiado com recursos da Fundação de Apoio
 à Pesquisa do Distrito Federal (FAP-DF),  processo:00193-00001027/2021-04.
-O  Geocontroleocorre  no  contexto  de  cooperação técnica e científica entre a
+O  Geocontrole ocorre  no  contexto  de  cooperação técnica e científica entre a
 Universidade Católica de Brasília e o Instituto Serzedello Corrêa.
 
 
