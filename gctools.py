@@ -41,6 +41,7 @@ from functools import partial
 from .mods.ai_inf.ai_inf import AIINF
 from .mods.sample.sample import SAMPLE
 from .mods.datagen.datagen import DATAGEN
+from .mods.mancha_urbana.mancha_urbana import MANCHAURBANA
 from .mods.about.about_dialog import ABOUTDialog
 from .resources import *
 # Import the code for the dialog
@@ -111,6 +112,7 @@ class GCTOOLS:
         self.menuAiInfButton = self.createToolButton(self.toolbar, u'AIINF', False)
         self.menuSampleButton = self.createToolButton(self.toolbar, u'SAMPLE', False)
         self.menuDatagenButton = self.createToolButton(self.toolbar, u'DATAGEN', False)
+        self.menuManchaUrbanaButton = self.createToolButton(self.toolbar, u'MANCHAURBANA', False)
 
         self.toolbar.addSeparator()
         #self.menuROSButton = self.createToolButton(self.toolbar, u'ROS', False)
@@ -268,6 +270,19 @@ class GCTOOLS:
         self.menuDatagenButton.addAction(self.action_datagen)
         self.menuDatagenButton.setDefaultAction(self.action_datagen)
 
+        icon_path_manchaurbana = ':/plugins/gctools/icons/datasetgen.jpg'
+        self.action_manchaurbana = self.add_action(
+            icon_path_manchaurbana,
+            text=u'MANCHAURBANA',
+            callback=self.run_manchaurbana,
+            # add_to_menu=False,
+            add_to_toolbar=False,
+            # withShortcut=False,
+            parentToolbar=self.menugc,
+            isCheckable=False
+        )
+        self.menuManchaUrbanaButton.addAction(self.action_manchaurbana)
+        self.menuManchaUrbanaButton.setDefaultAction(self.action_manchaurbana)
 
         # will be set False in run()
         self.first_start = True
@@ -306,6 +321,10 @@ class GCTOOLS:
     def run_ai_inf(self):
         self.ai_inf = AIINF(self.iface,self)
         self.ai_inf.run()
+
+    def run_manchaurbana(self):
+        self.mancha_urbana = MANCHAURBANA(self.iface,self)
+        self.mancha_urbana.run()
 
     def signal_worker(self,data):
         print("teste_signal",data)

@@ -25,7 +25,7 @@ import os
 import sys 
 sys.path.append(os.path.join(os.path.dirname(__file__),'lib'))
 
-from .datagen_dialog import DATAGENDialog
+from .mancha_urbana_dialog import MANCHAURBANADialog
 
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = 10000000000
@@ -54,7 +54,7 @@ import processing
 from qgis.core import *
 from qgis.gui import *
 from osgeo import gdal
-from qgis.core import QgsProcessingFeatureSourceDefinition
+from qgis.core import QgsProcessingFeatureSourceDefinition, QgsCoordinateReferenceSystem
 from qgis.core import QgsProject, QgsVectorLayer, QgsRasterLayer, QgsCoordinateTransform, QgsCoordinateReferenceSystem, QgsFeatureRequest
 from qgis.analysis import QgsRasterCalculatorEntry, QgsRasterCalculator
 import random
@@ -66,7 +66,7 @@ class WorkerGrade(QThread):
         QThread.__init__(self)
         self.stp = False
         self.plugin_dir = plugin_dir
-        self.datagen = cls_main
+        self.mancha_urbana = cls_main
 
 
     up_list = pyqtSignal(list)
@@ -74,8 +74,31 @@ class WorkerGrade(QThread):
 
     def run(self):
         print("worker running!")
+        canvas = self.mancha_urbana.gctools.iface.mapCanvas()
+        extent = canvas.extent()
+        crs = canvas.mapSettings().destinationCrs()
+        resultado = processing.run(
+            "native:creategrid",
+            {
+                'TYPE': 2,  # 2 = retângulos (quadrados)
+                'EXTENT': extent,
+                'HSPACING': 141.421356,
+                'VSPACING': 141.421356,
+                'HOVERLAY': 0,
+                'VOVERLAY': 0,
+                'CRS': crs,
+                'OUTPUT': 'memory:'
+            }
+        )
+        self.grid_antes = resultado['OUTPUT']
+        self.grid_antes.setName("grid_antes")
 
+        # Cria uma cópia da camada
+        self.grid_depois = self.grid_antes.clone()
+        self.grid_depois.setName("grid_depois")
 
+        QgsProject.instance().addMapLayer(self.grid_antes)
+        QgsProject.instance().addMapLayer(self.grid_depois)
 
 
 class WorkerClassify(QThread):
@@ -83,7 +106,7 @@ class WorkerClassify(QThread):
         QThread.__init__(self)
         self.stp = False
         self.plugin_dir = plugin_dir
-        self.datagen = cls_main
+        self.mancha_urbana = cls_main
 
 
     up_list = pyqtSignal(list)
@@ -97,7 +120,7 @@ class WorkerTrain(QThread):
         QThread.__init__(self)
         self.stp = False
         self.plugin_dir = plugin_dir
-        self.datagen = cls_main
+        self.mancha_urbana = cls_main
 
 
     up_list = pyqtSignal(list)
@@ -133,6 +156,7 @@ class MANCHAURBANA:
     def run(self):
         self.dlg = MANCHAURBANADialog()
         # show the dialog
+        self.dlg.pb_processar.pressed.connect(self.setworker)
         self.dlg.show()
 
         self.dlg.closeEvent = self.CloseEvent

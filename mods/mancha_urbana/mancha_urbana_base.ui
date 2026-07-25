@@ -93,6 +93,13 @@
           </item>
          </layout>
         </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pb_processar">
+          <property name="text">
+           <string>Processar!</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
